@@ -12,6 +12,9 @@
       }
     },
     {
+      "__resolveType": "site/sections/MyLoaderSection.tsx"
+    },
+    {
       "__resolveType": "Header"
     },
     {
