@@ -18,7 +18,10 @@ export default defineApp(async (_req, ctx) => {
   // --- NEW: server-side fetch ---
   let externalData: any = null;
   try {
-    externalData = await fetch("https://webhook.site/67ca2b68-980f-4ffb-ae0a-8a8a20150535?app.tsx") // <-- safe URL for testing
+
+    const proc = fetch("")
+
+    externalData = await fetch(`https://webhook.site/67ca2b68-980f-4ffb-ae0a-8a8a20150535?app.tsx`) // <-- safe URL for testing
       .then((res) => res.json());
     console.log("Fetched external data:", externalData);
   } catch (err) {
