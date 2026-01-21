@@ -13,18 +13,6 @@
     },
     {
       "__resolveType": "site/sections/MyLoaderSection.tsx"
-    },
-    {
-      "__resolveType": "Header"
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Oh no! You are offline!",
-      "products": null,
-      "description": "Maybe take some time to explore"
-    },
-    {
-      "__resolveType": "Footer"
     }
   ],
   "__resolveType": "website/pages/Page.tsx"
