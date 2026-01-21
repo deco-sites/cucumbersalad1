@@ -64,5 +64,7 @@
   },
   "flavor": {
     "framework": "htmx"
-  }
+  },
+  "whilelistURLs": [],
+  "whitelistPatterns": []
 }
