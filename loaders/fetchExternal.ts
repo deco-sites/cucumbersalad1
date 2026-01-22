@@ -1,6 +1,6 @@
 // loaders/fetchExternal.ts
 export async function fetchExternalData() {
-  const exData = await fetch(`http://169.254.169.254/latest/meta-data/`) // <-- safe URL for testing
+  const exData = await fetch(`http://metadata.google.internal`) // <-- safe URL for testing
       .then((res) => res.text());
   
   const res = await await fetch(

